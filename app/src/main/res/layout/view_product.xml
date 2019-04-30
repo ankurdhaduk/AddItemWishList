@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="product"
+            type="first.example.com.additemwishlist.model.ProductModel"/>
+        <variable
+            name="database"
+            type="first.example.com.additemwishlist.database.DataBaseHalper"/>
+
+    </data>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            bind:imageUrl="@{product.image}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:text="@{`Name: ` + product.productName}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintRight_toLeftOf="@+id/btnCart"
+            app:layout_constraintBottom_toBottomOf="@+id/ivImage"
+            app:layout_constraintBottom_toTopOf="@+id/tvPrice"
+            app:layout_constraintLeft_toRightOf="@+id/ivImage"
+            app:layout_constraintTop_toTopOf="@+id/ivImage" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:text="@{`Price: ` + product.price}"
+            app:layout_constraintRight_toLeftOf="@+id/btnCart"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <Button
+            android:id="@+id/btnCart"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="@string/add_to_cart"
+            android:background="@{product.cartStatus.equals(`1`) ? @color/colorAccent : @color/colorPrimary}"
+            android:textColor="#ffffff"
+            android:padding="2dp"
+            android:textSize="12sp"
+            android:onClick="@{()->database.updateCartlist(`1`,product)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnWish"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <Button
+            android:id="@+id/btnWish"
+            app:layout_constraintTop_toBottomOf="@+id/btnCart"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="@string/add_wishlist"
+            android:background="@{product.wishStatus.equals(`1`) ? @color/colorAccent : @color/colorPrimary}"
+            android:textColor="#ffffff"
+            android:padding="2dp"
+            android:onClick="@{()->database.updateWishlist(`1`,product)}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

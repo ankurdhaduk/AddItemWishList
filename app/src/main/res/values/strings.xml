@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AddItemWishList</string>
+    <string name="add_to_cart">add to cart</string>
+    <string name="add_wishlist">add wishlist</string>
+    <string name="load_data">load data</string>
+</resources>
